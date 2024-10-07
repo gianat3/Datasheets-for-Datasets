@@ -1,0 +1,36 @@
+---
+title: "Movies and Word Bank Datasets"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(readr)
+library(dplyr)
+
+movies <- read_csv("data/movies_data.csv")
+word_bank_comprehension <- read_csv("data/wordbank_administration_data.csv")
+
+```
+
+# Cleaning Movie Dataset
+```{r}
+options(scipen = 999)
+
+#movies_deleted_rows <- movies[rowSums(grepl("\uFFFD", movies)) == 0, ]
+
+names(movies) <- gsub(" ", "_", names(movies))
+
+```
+
+# Cleaning Childrens Comprehension Dataset
+```{r}
+childrens_comprehension_selected <- childrens_comprehension %>% 
+                                    select(language, age:sex, health_conditions:typically_developing)
+
+names(childrens_comprehension_selected) <- gsub(" ", "_", names(childrens_comprehension_selected))
+                                    
+                                          
+```
+
